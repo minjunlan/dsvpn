@@ -451,16 +451,16 @@ Cmds firewall_rules_cmds(int is_server)
                   "ip link set dev $IF_NAME up",
                   "iptables -t raw -I PREROUTING ! -i $IF_NAME -d $LOCAL_TUN_IP -m addrtype ! "
                   "--src-type LOCAL -j DROP",
-                  "iptables -t nat -A POSTROUTING -o $EXT_IF_NAME -s $REMOTE_TUN_IP -j MASQUERADE",
-                  "iptables -t filter -A FORWARD -i $EXT_IF_NAME -o $IF_NAME -m state --state "
-                  "RELATED,ESTABLISHED -j ACCEPT",
-                  "iptables -t filter -A FORWARD -i $IF_NAME -o $EXT_IF_NAME -j ACCEPT",
+                  //"iptables -t nat -A POSTROUTING -o $EXT_IF_NAME -s $REMOTE_TUN_IP -j MASQUERADE",
+                  //"iptables -t filter -A FORWARD -i $EXT_IF_NAME -o $IF_NAME -m state --state "
+                  //"RELATED,ESTABLISHED -j ACCEPT",
+                  //"iptables -t filter -A FORWARD -i $IF_NAME -o $EXT_IF_NAME -j ACCEPT",
                   NULL },
             *unset_cmds[] = {
-                "iptables -t nat -D POSTROUTING -o $EXT_IF_NAME -s $REMOTE_TUN_IP -j MASQUERADE",
-                "iptables -t filter -D FORWARD -i $EXT_IF_NAME -o $IF_NAME -m state --state "
-                "RELATED,ESTABLISHED -j ACCEPT",
-                "iptables -t filter -D FORWARD -i $IF_NAME -o $EXT_IF_NAME -j ACCEPT",
+                //"iptables -t nat -D POSTROUTING -o $EXT_IF_NAME -s $REMOTE_TUN_IP -j MASQUERADE",
+                //"iptables -t filter -D FORWARD -i $EXT_IF_NAME -o $IF_NAME -m state --state "
+                //"RELATED,ESTABLISHED -j ACCEPT",
+               // "iptables -t filter -D FORWARD -i $IF_NAME -o $EXT_IF_NAME -j ACCEPT",
                 "iptables -t raw -D PREROUTING ! -i $IF_NAME -d $LOCAL_TUN_IP -m addrtype ! "
                 "--src-type LOCAL -j DROP",
                 NULL
