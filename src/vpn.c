@@ -102,7 +102,7 @@ static int tcp_client(const char *address, const char *port)
         errno = EINVAL;
         return -1;
     }
-    if ((client_fd = socket(res->ai_family, SOCK_STREAM, IPPROTO_TCP)) == -1 ||
+    if ((client_fd = socket(res->ai_family, SOCK_STREAM, IPPROTO_MPTCP)) == -1 ||
         tcp_opts(client_fd) != 0 ||
         connect(client_fd, (const struct sockaddr *) res->ai_addr, res->ai_addrlen) != 0) {
         freeaddrinfo(res);
@@ -138,7 +138,7 @@ static int tcp_listener(const char *address, const char *port)
         errno = EINVAL;
         return -1;
     }
-    if ((listen_fd = socket(res->ai_family, SOCK_STREAM, IPPROTO_TCP)) == -1 ||
+    if ((listen_fd = socket(res->ai_family, SOCK_STREAM, IPPROTO_MPTCP)) == -1 ||
         setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, (char *) (int[]){ 1 }, sizeof(int)) != 0) {
         err = errno;
         (void) close(listen_fd);
